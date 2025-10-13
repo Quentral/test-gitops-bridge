@@ -17,7 +17,7 @@ spec:
               values: ['true']
   template:
     metadata:
-      name: '{{values.addonChart}}'
+      name: addon-{{values.addonChart}}
     spec:
       project: default
       sources:
