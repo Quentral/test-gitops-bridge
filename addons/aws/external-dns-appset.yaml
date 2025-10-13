@@ -32,8 +32,8 @@ spec:
             releaseName: '{{.values.addonChart}}'
             ignoreMissingValueFiles: true
             valueFiles:
-              - '{{metadata.annotations.addons_repo_basepath}}/environments/default/{{values.addonChart}}/values.yaml'
-              - '{{metadata.annotations.addons_repo_basepath}}/environments/{{metadata.labels.environment}}/{{values.addonChart}}/values.yaml'
+              - '{{.metadata.annotations.addons_repo_basepath}}/environments/default/{{.values.addonChart}}/values.yaml'
+              - '{{.metadata.annotations.addons_repo_basepath}}/environments/{{.metadata.labels.environment}}/{{.values.addonChart}}/values.yaml'
             valuesObject:
               provider: aws
               serviceAccount:
