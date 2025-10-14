@@ -1,0 +1,48 @@
+---
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: extra-db-operator
+spec:
+  goTemplate: true
+  syncPolicy:
+    preserveResourcesOnDeletion: true
+  generators:
+    - matrix:
+        generators:
+          - clusters:
+              values:
+                addonChart: db-operator
+          - list:
+              elements:
+                - values:
+                    enabled: true  # enable or disable the addon
+  template:
+    metadata:
+      name: addon-{{.values.addonChart}}
+    spec:
+      {{- if eq .values.enabled "true" }}
+      project: default
+      sources:
+        # - repoURL: '{{.metadata.annotations.addons_repo_url}}'
+        #   targetRevision: '{{.metadata.annotations.addons_repo_revision}}'
+        #   ref: values
+        - chart: '{{.values.addonChart}}'
+          repoURL: https://db-operator.github.io/charts
+          targetRevision: 1.41.0
+          helm:
+            releaseName: '{{.values.addonChart}}'
+            ignoreMissingValueFiles: true
+            valueFiles:
+              - '{{.metadata.annotations.addons_repo_basepath}}/environments/default/{{.values.addonChart}}/values.yaml'
+              - '{{.metadata.annotations.addons_repo_basepath}}/environments/{{.metadata.labels.environment}}/{{.values.addonChart}}/values.yaml'
+      destination:
+        name: '{{.name}}'
+        namespace: '{{.values.addonChart}}'
+      syncPolicy:
+        automated:
+          prune: true
+        syncOptions:
+          - CreateNamespace=true
+          - ServerSideApply=true  # Big CRDs
+      {{- end }}

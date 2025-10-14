@@ -14,7 +14,7 @@ spec:
           releaseName: argocd
         selector:
           matchExpressions:
-            - key: enable_ingress_nginx
+            - key: enable_argocd
               operator: In
               values: ['true']
   template:
