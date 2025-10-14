@@ -1,0 +1,4 @@
+provider: cloudflare
+domainFilters:
+  - quentrix.com
+policy: upsert-only
