@@ -12,12 +12,12 @@ spec:
         values:
           addonChart: db-operator
           enable_db_operator: "true"
-      selector:
-        matchLabels:
-          "values.enable_db_operator": "true"
+      # selector:
+      #   matchLabels:
+      #     "values.enable_db_operator": "true"
   template:
     metadata:
-      name: addon-{{.values.addonChart}}
+      name: extra-{{.values.addonChart}}
     spec:
       project: default
       sources:
