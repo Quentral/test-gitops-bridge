@@ -13,7 +13,7 @@ spec:
           addonChart: aws-load-balancer-controller
         selector:
           matchExpressions:
-            - key: enable_aws-load-balancer-controller
+            - key: enable_aws_load_balancer_controller
               operator: In
               values: ['true']
   template:
