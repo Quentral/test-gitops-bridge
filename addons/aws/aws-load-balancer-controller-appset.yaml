@@ -43,7 +43,7 @@ spec:
                   eks.amazonaws.com/role-arn: '{{.metadata.annotations.aws_load_balancer_controller_iam_role_arn}}'
       destination:
         name: '{{.name}}'
-        namespace: '{{.metadata.annotations.aws-load-balancer-controller_namespace}}'
+        namespace: '{{.metadata.annotations.aws_load_balancer_controller_namespace}}'
       syncPolicy:
         automated:
           prune: true
