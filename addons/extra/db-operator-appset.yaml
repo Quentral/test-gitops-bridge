@@ -14,7 +14,7 @@ spec:
           enable_db_operator: "true"
       selector:
         matchLabels:
-          - enable_db_operator: "true"
+          enable_db_operator: "true"
   template:
     metadata:
       name: addon-{{.values.addonChart}}
