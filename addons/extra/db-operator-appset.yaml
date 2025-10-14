@@ -8,15 +8,13 @@ spec:
   syncPolicy:
     preserveResourcesOnDeletion: true
   generators:
-    - matrix:
-        generators:
-          - clusters:
-              values:
-                addonChart: db-operator
-                enable_db_operator: "true"
-        selector:
-          matchLabels:
-            - enable_db_operator: "true"
+    - clusters:
+        values:
+          addonChart: db-operator
+          enable_db_operator: "true"
+      selector:
+        matchLabels:
+          - enable_db_operator: "true"
   template:
     metadata:
       name: addon-{{.values.addonChart}}
