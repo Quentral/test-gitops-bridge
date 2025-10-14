@@ -1,0 +1,67 @@
+controller:
+  config:
+    enable-serial-reloads: "true"
+
+  service:
+    externalTrafficPolicy: "Local"
+    annotations:
+      service.beta.kubernetes.io/aws-load-balancer-type: external  # AWS LBC
+      service.beta.kubernetes.io/aws-load-balancer-scheme: internet-facing
+      service.beta.kubernetes.io/aws-load-balancer-attributes: load_balancing.cross_zone.enabled=true
+      service.beta.kubernetes.io/aws-load-balancer-name: ingress-nginx
+    loadBalancerClass: service.k8s.aws/nlb  # this is temporary until AWS LBC mutation webhook is disabled
+    internal:
+      enabled: true
+      type: ClusterIP
+      annotations:
+        external-dns.alpha.kubernetes.io/internal-hostname: nginx-internal.infra.quentrix.com
+
+  autoscaling:
+    enabled: true
+    minReplicas: 2
+    maxReplicas: 4
+    targetCPUUtilizationPercentage: 80
+    targetMemoryUtilizationPercentage: 80
+
+  minAvailable: 2
+
+  affinity:
+    podAntiAffinity:
+      preferredDuringSchedulingIgnoredDuringExecution:
+        - weight: 20
+          podAffinityTerm:
+            labelSelector:
+              matchExpressions:
+                - key: app.kubernetes.io/name
+                  operator: In
+                  values:
+                    - '{{ include "ingress-nginx.name" . }}'
+            topologyKey: topology.kubernetes.io/zone
+        - weight: 10
+          podAffinityTerm:
+            labelSelector:
+              matchExpressions:
+                - key: app.kubernetes.io/name
+                  operator: In
+                  values:
+                    - '{{ include "ingress-nginx.name" . }}'
+            topologyKey: kubernetes.io/hostname
+
+  topologySpreadConstraints:
+    - maxSkew: 1  # max difference between AZs (remember we are using only 2 AZs)
+      topologyKey: topology.kubernetes.io/zone
+      whenUnsatisfiable: DoNotSchedule
+      labelSelector:
+        matchLabels:
+          app.kubernetes.io/name: '{{ include "ingress-nginx.name" . }}'
+
+  resources:
+    requests:
+      cpu: 100m
+      memory: 256Mi
+
+  metrics:
+    enabled: true
+    serviceMonitor:
+      enabled: true
+      namespace: monitoring

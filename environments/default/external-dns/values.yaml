@@ -1,4 +1,20 @@
-provider: cloudflare
+provider:
+  name: cloudflare
 domainFilters:
   - quentrix.com
-policy: upsert-only
+policy: sync
+
+# env:
+#   - name: CF_API_TOKEN
+#     valueFrom:
+#       secretKeyRef:
+#         name: cloudflare-api-token
+#         key: token
+
+serviceMonitor:
+  enabled: true
+  namespace: monitoring
+
+txtPrefix: xdns-
+extraArgs:
+  - --txt-new-format-only  # keep registry "clean". No valid starting from version 0.18.0

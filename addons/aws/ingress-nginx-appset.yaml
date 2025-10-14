@@ -27,7 +27,7 @@ spec:
         #   ref: values
         - chart: '{{.values.addonChart}}'
           repoURL: https://kubernetes.github.io/ingress-nginx
-          targetRevision: 4.10.0
+          targetRevision: 4.11.5
           helm:
             releaseName: '{{.values.addonChart}}'
             ignoreMissingValueFiles: true

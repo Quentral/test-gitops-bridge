@@ -1,1 +1,15 @@
----
+enableCertificateOwnerRef: true
+
+crds:
+  enabled: true
+
+prometheus:
+  servicemonitor:
+    enabled: true
+    namespace: monitoring
+
+    endpointAdditionalProperties:
+      relabelings:
+        - action: replace
+          replacement: infra
+          targetLabel: cluster
