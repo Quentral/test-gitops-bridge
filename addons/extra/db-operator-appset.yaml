@@ -13,7 +13,7 @@ spec:
           - clusters: {}
           - list:
               elements:
-                - enable_db_operator: "true"
+                - enable_db_operator: "false"
                   values:
                     addonChart: db-operator
       selector:
