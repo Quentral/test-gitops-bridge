@@ -10,7 +10,7 @@ spec:
   generators:
     - matrix:
         generators:
-          - clusters:
+          - clusters: {}
           - list:
               elements:
                 - enable_db_operator: "true"
