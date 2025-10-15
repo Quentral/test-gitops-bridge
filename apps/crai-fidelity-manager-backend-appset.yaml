@@ -16,9 +16,9 @@ spec:
           - list:
               elements:
                 - environment: stage
-                  enable_fidelity_manager_backend: "false"
-                - environment: prod
                   enable_fidelity_manager_backend: "true"
+                - environment: prod
+                  enable_fidelity_manager_backend: "false"
       selector:
         matchLabels:
           enable_fidelity_manager_backend: "true"
@@ -43,7 +43,8 @@ spec:
               - $values/{{.metadata.annotations.addons_repo_basepath}}environments/{{.environment}}/{{.values.addonChart}}/values.yaml
       destination:
         name: '{{.name}}'
-        namespace: '{{.values.addonChart}}'
+        #namespace: '{{.values.addonChart}}'
+        namespace: fidelity-manager-backend
       syncPolicy:
         automated:
           prune: true
