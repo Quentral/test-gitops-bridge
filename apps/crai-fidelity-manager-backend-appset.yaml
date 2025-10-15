@@ -16,7 +16,7 @@ spec:
                 - environment: stage
                   enable_fidelity_manager_backend: "true"
                 - environment: prod
-                  enable_fidelity_manager_backend: "false"
+                  enable_fidelity_manager_backend: "true"
           - clusters:
               values:
                 addonChart: fidelity-manager-backend
