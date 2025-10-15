@@ -11,15 +11,16 @@ spec:
   generators:
     - matrix:
         generators:
+          - clusters:
+              values:
+                addonChart: fidelity-manager-backend
           - list:
               elements:
                 - environment: stage
                   enable_fidelity_manager_backend: "true"
                 - environment: prod
-                  enable_fidelity_manager_backend: "true"
-          - clusters:
-              values:
-                addonChart: fidelity-manager-backend
+                  enable_fidelity_manager_backend: "false"
+
       selector:
         matchLabels:
           enable_fidelity_manager_backend: "true"
