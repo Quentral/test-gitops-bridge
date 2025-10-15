@@ -15,7 +15,8 @@ prometheus:
           targetLabel: cluster
 
 extraObjects:
-  - apiVersion: cert-manager.io/v1
+  - |
+    apiVersion: cert-manager.io/v1
     kind: ClusterIssuer
     metadata:
       name: letsencrypt-prod
@@ -29,7 +30,8 @@ extraObjects:
           - http01:
               ingress:
                 ingressClassName: nginx
-  - apiVersion: cert-manager.io/v1
+  - |
+    apiVersion: cert-manager.io/v1
     kind: ClusterIssuer
     metadata:
       name: letsencrypt-staging
