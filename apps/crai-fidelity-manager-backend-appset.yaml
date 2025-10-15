@@ -3,7 +3,6 @@ apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
   name: app-fidelity-manager-backend
-  namespace: argocd
 spec:
   goTemplate: true
   syncPolicy:
