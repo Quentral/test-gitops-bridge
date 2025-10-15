@@ -3,6 +3,7 @@ apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
   name: app-fidelity-manager-backend
+  namespace: argocd
 spec:
   goTemplate: true
   syncPolicy:
@@ -10,15 +11,15 @@ spec:
   generators:
     - matrix:
         generators:
-          - clusters:
-              values:
-                addonChart: fidelity-manager-backend
           - list:
               elements:
                 - environment: stage
                   enable_fidelity_manager_backend: "true"
                 - environment: prod
                   enable_fidelity_manager_backend: "false"
+          - clusters:
+              values:
+                addonChart: fidelity-manager-backend
       selector:
         matchLabels:
           enable_fidelity_manager_backend: "true"
