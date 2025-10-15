@@ -12,7 +12,7 @@ policy: sync
 #         key: token
 
 serviceMonitor:
-  enabled: true
+  enabled: false
   namespace: monitoring
 
 txtPrefix: xdns-
