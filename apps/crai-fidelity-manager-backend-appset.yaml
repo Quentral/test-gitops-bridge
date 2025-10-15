@@ -3,6 +3,7 @@ apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
   name: app-fidelity-manager-backend
+  namespace: argocd
 spec:
   goTemplate: true
   syncPolicy:
@@ -43,8 +44,8 @@ spec:
               - $values/{{.metadata.annotations.addons_repo_basepath}}environments/{{.environment}}/{{.values.addonChart}}/values.yaml
       destination:
         name: '{{.name}}'
-        #namespace: '{{.values.addonChart}}'
-        namespace: fidelity-manager-backend
+        namespace: '{{.values.addonChart}}'
+        # namespace: fidelity-manager-backend
       syncPolicy:
         automated:
           prune: true
