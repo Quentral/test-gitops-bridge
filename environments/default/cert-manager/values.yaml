@@ -5,7 +5,7 @@ crds:
 
 prometheus:
   servicemonitor:
-    enabled: true
+    enabled: false
     namespace: monitoring
 
     endpointAdditionalProperties:
@@ -13,3 +13,33 @@ prometheus:
         - action: replace
           replacement: infra
           targetLabel: cluster
+
+extraObjects:
+  - apiVersion: cert-manager.io/v1
+    kind: ClusterIssuer
+    metadata:
+      name: letsencrypt-prod
+    spec:
+      acme:
+        email: k8-stage@quentral.com
+        privateKeySecretRef:
+          name: letsencrypt-prod-account-key
+        server: https://acme-v02.api.letsencrypt.org/directory
+        solvers:
+          - http01:
+              ingress:
+                ingressClassName: nginx
+  - apiVersion: cert-manager.io/v1
+    kind: ClusterIssuer
+    metadata:
+      name: letsencrypt-staging
+    spec:
+      acme:
+        email: k8-stage@quentral.com
+        privateKeySecretRef:
+          name: letsencrypt-staging-account-key
+        server: https://acme-staging-v02.api.letsencrypt.org/directory
+        solvers:
+          - http01:
+              ingress:
+                ingressClassName: nginx
