@@ -40,6 +40,8 @@ spec:
             releaseName: '{{.values.addonChart}}'
             ignoreMissingValueFiles: true
             valueFiles:
+              - values.yaml
+              - values-{{.environment}}.yaml
               - $values/{{.metadata.annotations.addons_repo_basepath}}environments/default/{{.values.addonChart}}/values.yaml
               # - $values/{{.metadata.annotations.addons_repo_basepath}}/environments/{{.metadata.labels.environment}}/{{.values.addonChart}}/values.yaml
               - $values/{{.metadata.annotations.addons_repo_basepath}}environments/{{.environment}}/{{.values.addonChart}}/values.yaml
