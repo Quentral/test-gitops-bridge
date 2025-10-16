@@ -2,7 +2,8 @@ provider:
   name: cloudflare
 domainFilters:
   - quentrix.com
-policy: sync
+#policy: sync
+policy: upsert-only  # safer
 
 env:
   - name: CF_API_TOKEN
