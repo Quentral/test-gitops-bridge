@@ -1,0 +1,25 @@
+fastify:
+  ingress:
+    hosts:
+      - host: api.fidelity-manager.crai.quentrix.com
+        paths:
+          - path: /
+            pathType: ImplementationSpecific
+    tls:
+      - secretName: fidelity-manager-tls
+        hosts:
+          - api.fidelity-manager.crai.quentrix.com
+nginx:
+  ingress:
+    hosts:
+      - host: api.fidelity-manager.crai.quentrix.com
+        paths:
+          - path: /uploads
+            pathType: ImplementationSpecific
+    tls:
+      - secretName: fidelity-manager-tls
+        hosts:
+          - api.fidelity-manager.crai.quentrix.com
+env:
+  API_URL: https://api.fidelity-manager.crai.quentrix.com
+  SENTRY_ENVIRONMENT: stage-new-cluster
