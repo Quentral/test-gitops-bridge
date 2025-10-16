@@ -4,12 +4,12 @@ domainFilters:
   - quentrix.com
 policy: sync
 
-# env:
-#   - name: CF_API_TOKEN
-#     valueFrom:
-#       secretKeyRef:
-#         name: cloudflare-api-token
-#         key: token
+env:
+  - name: CF_API_TOKEN
+    valueFrom:
+      secretKeyRef:
+        name: cloudflare-api-token
+        key: token
 
 serviceMonitor:
   enabled: false

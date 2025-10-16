@@ -52,7 +52,7 @@ spec:
             #   - $values/{{.metadata.annotations.addons_repo_basepath}}environments/{{.metadata.labels.environment}}/{{.values.addonChart}}/resources.yaml
             valuesObject:
               Secrets:
-                - name: cloudflare-api-token
+                - fullnameOverride: cloudflare-api-token
                   keys:
                     # token: '{{.metadata.annotations.cloudflare_api_token}}'
                     token: ZFpzalpKV1hWbUVQcGFmbjFTd3YwM0pHX09zdWFJUXpPWTVobDFWdQ==
