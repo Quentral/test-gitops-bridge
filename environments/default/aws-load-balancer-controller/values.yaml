@@ -1,4 +1,4 @@
 podDisruptionBudget:
   maxUnavailable: 1
 createIngressClassResource: false  # no need, we use ingress-nginx as Ingress Controller
-enableServiceMutatorWebhook: false  # keep in-tree as default (temporary)
+enableServiceMutatorWebhook: true  # override (with mutatiion) in-tree as default (temporary)
