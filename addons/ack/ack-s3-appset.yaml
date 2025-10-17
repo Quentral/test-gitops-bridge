@@ -16,7 +16,7 @@ spec:
           matchExpressions:
             - key: enable_ack_s3
               operator: In
-              values: ['true']
+              values: ['trueX']
   template:
     metadata:
       name: addon-{{.values.releaseName}}
