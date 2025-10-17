@@ -2,7 +2,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
-  name: addons-ack-s3
+  name: addons-ack-rds
 spec:
   goTemplate: true
   syncPolicy:
@@ -10,11 +10,11 @@ spec:
   generators:
     - clusters:
         values:
-          addonChart: s3-chart
-          releaseName: ack-s3
+          addonChart: rds-chart
+          releaseName: ack-rds
         selector:
           matchExpressions:
-            - key: enable_ack_s3
+            - key: enable_ack_rds
               operator: In
               values: ['true']
   template:
@@ -28,7 +28,7 @@ spec:
           ref: values
         - chart: '{{.values.addonChart}}'
           repoURL: public.ecr.aws/aws-controllers-k8s
-          targetRevision: 1.1.1
+          targetRevision: 1.6.2
           helm:
             releaseName: '{{.values.releaseName}}'
             ignoreMissingValueFiles: true
@@ -40,12 +40,12 @@ spec:
                 region: '{{.metadata.annotations.aws_region}}'
               nameOverride: '{{.values.releaseName}}'
               serviceAccount:
-                name: '{{.metadata.annotations.ack_s3_service_account}}'
+                name: '{{.metadata.annotations.ack_rds_service_account}}'
                 annotations:
-                  eks.amazonaws.com/role-arn: '{{.metadata.annotations.ack_s3_iam_role_arn}}'
+                  eks.amazonaws.com/role-arn: '{{.metadata.annotations.ack_rds_iam_role_arn}}'
       destination:
         name: '{{.name}}'
-        namespace: '{{.metadata.annotations.ack_s3_namespace}}'
+        namespace: '{{.metadata.annotations.ack_rds_namespace}}'
       syncPolicy:
         automated:
           prune: true
