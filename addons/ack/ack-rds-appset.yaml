@@ -16,7 +16,7 @@ spec:
           matchExpressions:
             - key: enable_ack_rds
               operator: In
-              values: ['trueX']
+              values: ['true']
   template:
     metadata:
       name: addon-{{.values.releaseName}}
