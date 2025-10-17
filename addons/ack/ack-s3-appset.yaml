@@ -37,12 +37,12 @@ spec:
               - $values/{{.metadata.annotations.addons_repo_basepath}}environments/{{.metadata.labels.environment}}/{{.values.releaseName}}/values.yaml
             valuesObject:
               aws:
-                region: '{{metadata.annotations.aws_region}}'
+                region: '{{.metadata.annotations.aws_region}}'
               # nameOverride: '{{values.addonChartRepositoryNamespace}}'
               serviceAccount:
-                name: '{{metadata.annotations.ack_s3_service_account}}'
+                name: '{{.metadata.annotations.ack_s3_service_account}}'
                 annotations:
-                  eks.amazonaws.com/role-arn: '{{metadata.annotations.ack_s3_iam_role_arn}}'
+                  eks.amazonaws.com/role-arn: '{{.metadata.annotations.ack_s3_iam_role_arn}}'
       destination:
         name: '{{.name}}'
         namespace: '{{.metadata.annotations.ack_s3_namespace}}'
