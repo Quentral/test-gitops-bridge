@@ -38,7 +38,7 @@ spec:
             valuesObject:
               aws:
                 region: '{{.values.releaseName}}'
-              nameOverride: '{{values.addonChartRepositoryNamespace}}'
+              nameOverride: '{{.values.releaseName}}'
               serviceAccount:
                 name: '{{.metadata.annotations.ack_s3_service_account}}'
                 annotations:
