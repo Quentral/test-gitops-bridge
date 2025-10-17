@@ -37,8 +37,8 @@ spec:
               - $values/{{.metadata.annotations.addons_repo_basepath}}environments/{{.metadata.labels.environment}}/{{.values.releaseName}}/values.yaml
             valuesObject:
               aws:
-                region: '{{.metadata.annotations.aws_region}}'
-              # nameOverride: '{{values.addonChartRepositoryNamespace}}'
+                region: '{{.values.releaseName}}'
+              nameOverride: '{{values.addonChartRepositoryNamespace}}'
               serviceAccount:
                 name: '{{.metadata.annotations.ack_s3_service_account}}'
                 annotations:
